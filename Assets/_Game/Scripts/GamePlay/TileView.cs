@@ -1,20 +1,31 @@
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TileView : MonoBehaviour, IPointerClickHandler
 {
     [Header("UI")]
-    public Image icon;
-    public Button button;
+    public RectTransform rect;
     public CanvasGroup canvasGroup;
+    public Button button;
 
     [HideInInspector] public TileTypeSO type;
     [HideInInspector] public int layer;
-    [HideInInspector] public RectTransform rect;
     [HideInInspector] public bool isBlocked;
 
-    BoardManager board;
+    // NEW: board ref + click override
+    [HideInInspector] public BoardManager board;
+    public Action<TileView> onClickOverride;
+
+    // NEW: origin data (board position before moving to tray)
+    [HideInInspector] public bool hasOrigin;
+    [HideInInspector] public RectTransform originParent;
+    [HideInInspector] public Vector2 originAnchoredPos;
+    [HideInInspector] public int originLayer;
+    [HideInInspector] public int originSiblingIndex;
+
+    [SerializeField] private Image icon;
 
     public void Init(BoardManager board, TileTypeSO type, int layer)
     {
@@ -22,28 +33,59 @@ public class TileView : MonoBehaviour, IPointerClickHandler
         this.type = type;
         this.layer = layer;
 
-        rect = (RectTransform)transform;
-        if (icon) icon.sprite = type.sprite;
+        if (!rect) rect = (RectTransform)transform;
+
+        if (icon && type) icon.sprite = type.sprite;   
+        if (icon) icon.enabled = (icon.sprite != null);
 
         SetBlocked(false);
+    }
+
+    public void SaveOrigin()
+    {
+        // gọi đúng 1 lần khi tile còn đang ở board
+        hasOrigin = true;
+        originParent = rect.parent as RectTransform;
+        originAnchoredPos = rect.anchoredPosition;
+        originLayer = layer;
+        originSiblingIndex = rect.GetSiblingIndex();
     }
 
     public void SetBlocked(bool blocked)
     {
         isBlocked = blocked;
-        if (button) button.interactable = !blocked;
 
-        // "tile click được thì sáng, không click được thì tối"
+        // chỉ dùng blocked cho BOARD (mờ khi bị che)
         if (canvasGroup)
         {
             canvasGroup.alpha = blocked ? 0.35f : 1f;
             canvasGroup.blocksRaycasts = !blocked;
+            canvasGroup.interactable = !blocked;
         }
+        if (button) button.interactable = !blocked;
+    }
+
+    public void SetClickable(bool clickable, float alpha = 1f)
+    {
+        if (canvasGroup)
+        {
+            canvasGroup.blocksRaycasts = clickable;
+            canvasGroup.interactable = clickable;
+            canvasGroup.alpha = alpha;
+        }
+        if (button) button.interactable = clickable;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isBlocked) return;
-        board.OnTileClicked(this);
+
+        if (onClickOverride != null)
+        {
+            onClickOverride.Invoke(this);
+            return;
+        }
+
+        board?.OnTileClicked(this);
     }
 }
