@@ -1,31 +1,16 @@
 using UnityEngine;
 
-public class PanelRemoveItem : MonoBehaviour
+public class PanelRemoveItem : UICanvas
 {
-    public GameObject root;
-    public RemoveItemButtonUI removeButtonUI; 
-
-    public void Show()
-    {
-        if (root) root.SetActive(true);
-        else gameObject.SetActive(true);
-    }
-
-    public void Hide()
-    {
-        if (root) root.SetActive(false);
-        else gameObject.SetActive(false);
-    }
-
     public void BtnClaim()
     {
-        if (!ItemInventory.Instance) return;
+        ItemInventory.Instance?.ClaimRemove(addUses: 1);
 
-        ItemInventory.Instance.Add(ItemType.Remove, 1);
-
-        gameObject.SetActive(false);
-        if (removeButtonUI) removeButtonUI.ClosePanel();
+        UIManager.Instance.CloseUIDirectly<PanelRemoveItem>();
     }
 
-    public void BtnClose() => Hide();
+    public void BtnClose()
+    {
+        UIManager.Instance.CloseUIDirectly<PanelRemoveItem>();
+    }
 }

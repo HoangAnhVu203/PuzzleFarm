@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class PanelUndoItem : UICanvas
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void BtnClaim()
     {
-        
+        ItemInventory.Instance?.ClaimUndo(1);
+        UIManager.Instance.CloseUIDirectly<PanelUndoItem>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void BtnClose()
     {
-        
+        UIManager.Instance.CloseUIDirectly<PanelRemoveItem>();
     }
 }

@@ -92,30 +92,48 @@ public class GameManager : Singleton<GameManager>
     IEnumerator LoadAndStartLevelCR(bool reloadCurrent = false, bool loadNext = false)
     {
         isTransitioning = true;
+
+        // 1) Đóng/bỏ bind level cũ để tránh event bắn nhầm
+        Unbind();
+
+        // 2) UI Loading
         SetState(GameState.Loading);
 
         if (!levelManager)
         {
             Debug.LogError("[GameManager] Missing LevelManager.");
+            isTransitioning = false;
             yield break;
         }
 
+        // 3) Reset item/inventory mỗi lần vào level (retry hay next đều reset)
+        ItemInventory.Instance?.ResetAllItemsToDefault();
+
+        // 4) Kick load level (async)
         if (loadNext) levelManager.LoadNextLevel();
-        else if (reloadCurrent) levelManager.ReloadLevel();
         else levelManager.ReloadLevel();
 
+        // 5) Chờ level load xong thật sự (board/tray != null)
         yield return new WaitUntil(() =>
             levelManager.CurrentBoard != null &&
             levelManager.CurrentTray  != null
         );
 
+        // (khuyến nghị) chờ thêm 1 frame để Start/Awake của level chạy ổn định
+        yield return null;
+
+        // 6) Bind refs mới
         BindCurrentLevelRefs();
 
-        if (loadingSeconds > 0f) yield return new WaitForSeconds(loadingSeconds);
+        // 7) Loading delay
+        if (loadingSeconds > 0f)
+            yield return new WaitForSeconds(loadingSeconds);
 
+        // 8) Vào gameplay
         SetState(GameState.Gameplay);
         isTransitioning = false;
 
+        // 9) Check win ngay (phòng level rỗng)
         EvaluateWin();
     }
 
@@ -204,4 +222,23 @@ public class GameManager : Singleton<GameManager>
         if (winNextDelay > 0f) yield return new WaitForSeconds(winNextDelay);
         yield return LoadAndStartLevelCR(loadNext: true);
     }
+
+    public void ReturnToHome()
+    {
+        isTransitioning = false;
+
+        // 1) Unbind event level cũ
+        Unbind();
+
+        // 2) Hủy level hiện tại
+        if (levelManager != null)
+            levelManager.UnloadCurrentLevel();
+
+        // 3) Reset item nếu cần
+        ItemInventory.Instance?.ResetAllItemsToDefault();
+
+        // 4) Mở Home UI
+        SetState(GameState.Home);
+    }
+    
 }

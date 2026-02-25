@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class PanelGamePlay : UICanvas
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void OpenSetting()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        UIManager.Instance.OpenUI<PanelSetting>();
         
     }
 }
