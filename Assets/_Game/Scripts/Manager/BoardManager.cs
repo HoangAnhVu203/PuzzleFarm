@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +31,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private AnimationCurve gatherEase = AnimationCurve.EaseInOut(0, 0, 1, 1);
     [SerializeField] private AnimationCurve spreadEase = AnimationCurve.EaseInOut(0, 0, 1, 1);
     [SerializeField] private float gatherScale = 0.85f;
+
 
     public event Action onBoardChanged;
     public int BoardCount
@@ -130,7 +131,7 @@ public class BoardManager : MonoBehaviour
         if (list.Count > pileCount)
             list.RemoveRange(pileCount, list.Count - pileCount);
 
-        Shuffle(list);
+        //Shuffle(list);
         return list;
     }
 
@@ -205,13 +206,22 @@ public class BoardManager : MonoBehaviour
 
         for (int r = 0; r < rows; r++)
         {
+            var rowList = new List<Vector2>();
+
             for (int c = 0; c < cols; c++)
             {
                 float x = startX + c * spacing;
-                float y = startY - r * spacing;
-                list.Add(new Vector2(x, y));
+                float y = startY - r * spacing; // từ trên xuống dưới
+                rowList.Add(new Vector2(x, y));
             }
+
+            // ✅ random trong từng hàng
+            Shuffle(rowList);
+
+            // add vào list chính theo thứ tự hàng
+            list.AddRange(rowList);
         }
+
         return list;
     }
 

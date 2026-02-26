@@ -135,6 +135,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   gatherScale: 0.85
+  minTilesPerLayer: 30
+  maxTilesPerLayer: 50
+  randomCountPerLayer: 1
 --- !u!1 &470284753173924060
 GameObject:
   m_ObjectHideFlags: 0
