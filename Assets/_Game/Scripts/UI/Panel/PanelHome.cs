@@ -6,4 +6,31 @@ public class PanelHome : UICanvas
     {
         GameManager.Instance.BtnPlay();
     }
+
+    public void OpenSpinBTN()
+    {
+        UIManager.Instance.CloseUIDirectly<PanelHome>();
+        UIManager.Instance.OpenUI<PanelSpin>();
+    }
+
+    public void OpenReverralBTN()
+    {
+        UIManager.Instance.OpenUI<PanelReferral>();
+    }
+
+    public void OpenDailyMissionBTN()
+    {
+        UIManager.Instance.OpenUI<PanelDailyMission>();
+        UIManager.Instance.CloseUIDirectly<PanelHome>();
+    }
+
+    public void OpenReferralbtn()
+    {
+        UIManager.Instance.OpenUI<PanelReferral>();
+    }
+
+    public void OpenloginPanel()
+    {
+        UIManager.Instance.OpenUI<PanelLogin>();
+    }
 }

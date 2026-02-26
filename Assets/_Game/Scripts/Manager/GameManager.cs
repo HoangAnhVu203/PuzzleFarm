@@ -42,6 +42,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         SetState(GameState.Home);
+        DailyMissionSystem.Instance?.SetCompletedById(DailyMissionId.UsePuzzleFarm);
     }
 
     void Update()
@@ -153,6 +154,8 @@ public class GameManager : Singleton<GameManager>
         board.onBoardChanged += OnAnyChanged;
         tray.onTrayChanged   += OnAnyChanged;
         tray.onTrayFull      += OnTrayFull;
+
+        tray.onTilesCleared += OnTilesCleared;
     }
 
     void Unbind()
@@ -162,7 +165,9 @@ public class GameManager : Singleton<GameManager>
         {
             tray.onTrayChanged -= OnAnyChanged;
             tray.onTrayFull -= OnTrayFull;
+            tray.onTilesCleared -= OnTilesCleared;
         }
+        
 
         board = null;
         tray  = null;
@@ -241,4 +246,9 @@ public class GameManager : Singleton<GameManager>
         SetState(GameState.Home);
     }
     
+    void OnTilesCleared(int count)
+    {
+        // mỗi tile cleared = 1 khối, match 3 => +3
+        DailyMissionSystem.Instance?.AddProgressById(DailyMissionId.Break300, count);
+    }
 }

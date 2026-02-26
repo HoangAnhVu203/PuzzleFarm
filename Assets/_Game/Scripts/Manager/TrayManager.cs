@@ -56,6 +56,7 @@ public class TrayManager : MonoBehaviour
 
     public int TrayCount { get { PruneNull(); return inTray.Count; } }
     public int WaitCount { get { PruneNull(); return inWait.Count; } }
+    public event System.Action<int> onTilesCleared;
     void Start()
     {
         GameContext.Instance?.RegisterTray(this);
@@ -430,6 +431,8 @@ public class TrayManager : MonoBehaviour
 
         yield return new WaitForSeconds(delayBeforeClear);
         yield return StartCoroutine(ShrinkTilesCR(toClear, shrinkDuration));
+
+        onTilesCleared?.Invoke(toClear.Count);
 
         for (int i = 0; i < toClear.Count; i++)
         {

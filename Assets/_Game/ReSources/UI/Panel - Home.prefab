@@ -251,7 +251,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 20467671955027399}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8587020070689144344}
+        m_TargetAssemblyTypeName: PanelHome, Assembly-CSharp
+        m_MethodName: OpenloginPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &931404967059157640
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +658,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5099796936688490105}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8587020070689144344}
+        m_TargetAssemblyTypeName: PanelHome, Assembly-CSharp
+        m_MethodName: OpenReverralBTN
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3664264559857225615
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +684,7 @@ GameObject:
   - component: {fileID: 6552257291339890267}
   - component: {fileID: 4023393406466694976}
   m_Layer: 5
-  m_Name: LiveOpsBTN
+  m_Name: LuckySpinBTN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -766,7 +790,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6552257291339890267}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8587020070689144344}
+        m_TargetAssemblyTypeName: PanelHome, Assembly-CSharp
+        m_MethodName: OpenSpinBTN
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3886017428042339507
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +1001,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5561442736588718116}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8587020070689144344}
+        m_TargetAssemblyTypeName: PanelHome, Assembly-CSharp
+        m_MethodName: OpenDailyMissionBTN
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5672766370412281616
 GameObject:
   m_ObjectHideFlags: 0

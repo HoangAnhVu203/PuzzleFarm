@@ -26,6 +26,7 @@ public class TileView : MonoBehaviour, IPointerClickHandler
     [HideInInspector] public int originSiblingIndex;
 
     [SerializeField] private Image icon;
+    [SerializeField] private Image overlayGray;
 
     public void Init(BoardManager board, TileTypeSO type, int layer)
     {
@@ -55,25 +56,33 @@ public class TileView : MonoBehaviour, IPointerClickHandler
     {
         isBlocked = blocked;
 
-        // chỉ dùng blocked cho BOARD (mờ khi bị che)
+        if (overlayGray)
+            overlayGray.gameObject.SetActive(blocked);
+
         if (canvasGroup)
         {
-            canvasGroup.alpha = blocked ? 0.35f : 1f;
             canvasGroup.blocksRaycasts = !blocked;
             canvasGroup.interactable = !blocked;
+            canvasGroup.alpha = 1f; // không fade nữa
         }
-        if (button) button.interactable = !blocked;
-    }
 
+        if (button)
+            button.interactable = !blocked;
+    }
     public void SetClickable(bool clickable, float alpha = 1f)
     {
+        if (overlayGray)
+            overlayGray.gameObject.SetActive(!clickable);
+
         if (canvasGroup)
         {
             canvasGroup.blocksRaycasts = clickable;
             canvasGroup.interactable = clickable;
-            canvasGroup.alpha = alpha;
+            canvasGroup.alpha = 1f; 
         }
-        if (button) button.interactable = clickable;
+
+        if (button)
+            button.interactable = clickable;
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Sample2
   m_EditorClassIdentifier: Assembly-CSharp::TileTypeSO
   id: 2
-  sprite: {fileID: 21300000, guid: f11f68976d8e440f5bf1a10d67f505a7, type: 3}
+  sprite: {fileID: 21300000, guid: 6fcc58a9bc2234d388e5e90e80baa77e, type: 3}

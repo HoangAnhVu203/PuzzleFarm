@@ -678,6 +678,7 @@ GameObject:
   - component: {fileID: 783456582432594686}
   - component: {fileID: 8248879066326375608}
   - component: {fileID: 2164093218321698693}
+  - component: {fileID: 6643645290273463769}
   m_Layer: 5
   m_Name: Panel - Login
   m_TagString: Untagged
@@ -743,6 +744,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6643645290273463769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5944645807469169442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0083862ebf8734f718adfe7ab4aafde6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelLogin
+  isDestroyOnClose: 0
 --- !u!1 &6637870169240323597
 GameObject:
   m_ObjectHideFlags: 0
