@@ -33,4 +33,19 @@ public class PanelHome : UICanvas
     {
         UIManager.Instance.OpenUI<PanelLogin>();
     }
+
+    public void OpenInvitePanel()
+    {
+        UIManager.Instance.OpenUI<PanelInvite>();
+    }
+
+    public void OpenCustomizePanel()
+    {
+        UIManager.Instance.OpenUI<PanelCustomize>();
+    }
+
+    public void OpenCharacterCard()
+    {
+        UIManager.Instance.OpenUI<PanelCharacterCard>();
+    }
 }

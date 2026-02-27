@@ -14,6 +14,13 @@ public class GameManager : Singleton<GameManager>
     [Header("Win -> Next Level")]
     [SerializeField] private float winNextDelay = 0.25f;
 
+    [Header("Ads Rules")]
+    [SerializeField] private int clearsPerAds1 = 6;
+    private int clearComboCount;
+
+    [SerializeField] private float ads2IntervalSeconds = 120f;
+    private Coroutine ads2CR;
+
     private GameState state = GameState.Home;
 
     private BoardManager board;
@@ -87,6 +94,7 @@ public class GameManager : Singleton<GameManager>
                 UIManager.Instance.OpenUI<PanelLose_1>();
                 break;
         }
+        HandleAds2LoopByState(s);
     }
 
     // ===== Core flow =====
@@ -96,6 +104,7 @@ public class GameManager : Singleton<GameManager>
 
         // 1) Đóng/bỏ bind level cũ để tránh event bắn nhầm
         Unbind();
+        clearComboCount = 0;
 
         // 2) UI Loading
         SetState(GameState.Loading);
@@ -248,7 +257,67 @@ public class GameManager : Singleton<GameManager>
     
     void OnTilesCleared(int count)
     {
-        // mỗi tile cleared = 1 khối, match 3 => +3
+        // mission phá 300 khối
         DailyMissionSystem.Instance?.AddProgressById(DailyMissionId.Break300, count);
+        DailyBreakProgress.Add(count);
+        
+        // Ads1: mỗi khi clear 3 tile => +1 combo
+        if (count >= 3)
+        {
+            clearComboCount++;
+
+            if (clearComboCount % clearsPerAds1 == 0)
+            {
+                ShowAds1();
+            }
+        }
+    }
+
+    void ShowAds1()
+    {
+        if (state != GameState.Gameplay) return;
+        if (isTransitioning) return;
+        if (IsAnyAdsOpen()) return;
+
+        UIManager.Instance.OpenUI<PanelAds1>();
+    }
+
+    void HandleAds2LoopByState(GameState s)
+    {
+        if (s == GameState.Gameplay)
+        {
+            if (ads2CR == null)
+                ads2CR = StartCoroutine(Ads2LoopCR());
+        }
+        else
+        {
+            if (ads2CR != null)
+            {
+                StopCoroutine(ads2CR);
+                ads2CR = null;
+            }
+        }
+        if (IsAnyAdsOpen()) return;
+    }
+
+    IEnumerator Ads2LoopCR()
+    {
+        while (state == GameState.Gameplay)
+        {
+            yield return new WaitForSeconds(ads2IntervalSeconds);
+
+            if (state != GameState.Gameplay) continue;
+            if (isTransitioning) continue;
+            
+
+            UIManager.Instance.OpenUI<PanelAds2>(); 
+        }
+
+        ads2CR = null;
+    }
+
+    bool IsAnyAdsOpen()
+    {
+        return UIManager.Instance.IsUIOpened<PanelAds1>() || UIManager.Instance.IsUIOpened<PanelAds2>();
     }
 }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac77f236e996449b8b106f49121ba8c, type: 3}
+  m_Name: Character2
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterDefSO
+  id: 2
+  displayName: Santa
+  icon: {fileID: 1480917699468073914, guid: fb78a780a3f3b4ffab734b93adc86d64, type: 3}
+  unlockNeed: 9
+  cardSprites:
+  - {fileID: 21300000, guid: d46b27a1bf1f342bba9581262b35c9b4, type: 3}
+  - {fileID: 21300000, guid: 6fcc58a9bc2234d388e5e90e80baa77e, type: 3}
+  - {fileID: 21300000, guid: 912f17f8337bb4fd7b032c383f4eba44, type: 3}
+  - {fileID: 21300000, guid: 162160b60a3c74e8fa0d7c5005f10df2, type: 3}
+  - {fileID: 21300000, guid: 665025cf13a8646209d3a0814145ca18, type: 3}
+  - {fileID: 21300000, guid: 19729b25e1c2547f8a110d7b06da6fb6, type: 3}
+  - {fileID: 21300000, guid: 3c82487a904004fb0b431e049ab26395, type: 3}
+  - {fileID: 21300000, guid: bea04d19f9ff84e7ab9a72084b4e836c, type: 3}
+  - {fileID: 21300000, guid: 5e66f184286ad45b681c0e970436368d, type: 3}

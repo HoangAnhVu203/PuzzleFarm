@@ -62,6 +62,7 @@ public class LuckyWheel : MonoBehaviour
 
     void GiveReward(int index)
     {
-        // xử lý phần thưởng tại đây
+        DailyMissionSystem.Instance?.AddProgressById(DailyMissionId.Mission5, 1);
+        //TODO: ADD coin
     }
 }

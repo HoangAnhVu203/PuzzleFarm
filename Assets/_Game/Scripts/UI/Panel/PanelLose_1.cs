@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class PanelLose_1 : UICanvas
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void CloseUI()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UIManager.Instance.CloseUIDirectly<PanelLose_1>();
+        UIManager.Instance.OpenUI<PanelLose_2>();
     }
 }

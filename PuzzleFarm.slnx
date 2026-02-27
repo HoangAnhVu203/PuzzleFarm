@@ -27,6 +27,7 @@
   <Project Path="PPv2URPConverters.csproj" />
   <Project Path="Unity.2D.Animation.Editor.csproj" />
   <Project Path="Unity.Searcher.Editor.csproj" />
+  <Project Path="spine-unity-editor.csproj" />
   <Project Path="Unity.2D.SpriteShape.Runtime.csproj" />
   <Project Path="UnityEditor.TestRunner.csproj" />
   <Project Path="Unity.VisualScripting.Core.csproj" />
@@ -35,6 +36,7 @@
   <Project Path="Unity.UnifiedRayTracing.Runtime.csproj" />
   <Project Path="Unity.VisualScripting.State.Editor.csproj" />
   <Project Path="Unity.Burst.CodeGen.csproj" />
+  <Project Path="spine-unity.csproj" />
   <Project Path="Unity.VisualScripting.Flow.csproj" />
   <Project Path="Unity.PerformanceTesting.csproj" />
   <Project Path="Unity.2D.Tilemap.Extras.Editor.csproj" />
